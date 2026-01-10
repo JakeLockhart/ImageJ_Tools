@@ -22,7 +22,8 @@ function ax = MeanProjection(Stack)
         %
     % <End Documentation>
     
-    imagesc(mean(Stack, 3));
+    Image = squeeze(mean(Stack, 3));
+    imagesc(Image);
 
     axis image;
     colormap gray;
