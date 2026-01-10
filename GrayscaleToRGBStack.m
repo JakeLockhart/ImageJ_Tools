@@ -31,11 +31,11 @@ function RGBStack = GrayscaleToRGBStack(GrayStack, RGB)
     end
 
     [rows, columns, frames] = size(GrayStack);
-    RGBStack = zeros(rows, columns, 3, frames);
+    RGBStack = zeros(rows, columns, frames, 3);
 
     for k = 1:frames
-        RGBStack(:,:,1,k) = GrayStack(:,:,k) * RGB(1);  % Red
-        RGBStack(:,:,2,k) = GrayStack(:,:,k) * RGB(2);  % Green
-        RGBStack(:,:,3,k) = GrayStack(:,:,k) * RGB(3);  % Blue
+        RGBStack(:,:,k,1) = GrayStack(:,:,k) * RGB(1);  % Red
+        RGBStack(:,:,k,2) = GrayStack(:,:,k) * RGB(2);  % Green
+        RGBStack(:,:,k,3) = GrayStack(:,:,k) * RGB(3);  % Blue
     end
 end
