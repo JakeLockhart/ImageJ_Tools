@@ -22,7 +22,6 @@ function ax = MeanProjection(Stack)
         %
     % <End Documentation>
     
-    figure('Name', 'Draw ROI(s)')
     imagesc(mean(Stack, 3));
 
     axis image;
