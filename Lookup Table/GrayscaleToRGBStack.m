@@ -38,4 +38,6 @@ function RGBStack = GrayscaleToRGBStack(GrayStack, RGB)
         RGBStack(:,:,k,2) = GrayStack(:,:,k) * RGB(2);  % Green
         RGBStack(:,:,k,3) = GrayStack(:,:,k) * RGB(3);  % Blue
     end
+
+    RGBStack = squeeze(RGBStack);
 end
