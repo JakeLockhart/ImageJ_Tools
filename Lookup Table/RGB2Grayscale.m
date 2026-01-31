@@ -1,4 +1,4 @@
-function GrayStack = RGBToGrayscale(Stack)
+function GrayStack = RGB2Grayscale(Stack)
     % <Documentation>
         % RGBToGrayscale()
         %   
