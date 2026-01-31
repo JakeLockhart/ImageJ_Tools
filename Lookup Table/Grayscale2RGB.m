@@ -1,11 +1,11 @@
-function RGBStack = GrayscaleToRGBStack(GrayStack, RGB)
+function RGBStack = Grayscale2RGB(GrayStack, RGB)
     % <Documentation>
-        % GrayscaleToRGBStack()
+        % Grayscale2RGB()
         %   Converts a grayscale image to an RGB image based on the user defined RGB color vector.   
         %   Created by: jsl5865
         %   
         % Syntax:
-        %   RGBStack = GrayscaleToRGBStack(GrayStack, RGB)
+        %   RGBStack = Grayscale2RGB(GrayStack, RGB)
         %
         % Description:
         %   This function converts a 3D grayscale image stack into a 4D RGB image stack. Each frame 
