@@ -1,4 +1,4 @@
-function ExportTif(ImageStack, FileName, SaveIn)
+function ExportTif(ImageStack, FileSize, FileName, SaveIn)
     % <Documentation>
         % ExportTif()
         %   
@@ -14,13 +14,14 @@ function ExportTif(ImageStack, FileName, SaveIn)
         %   
     % <End Documentation>
     arguments
-        ImageStack (:,:,:) double {mustBeNumeric}
+        ImageStack (:,:,:) {mustBeNumeric}
+        FileSize (1,1) double = 1e9
         FileName (1,1) string = ""
         SaveIn (1,1) string = ""
     end
 
     validateExportProperties;
-    exportInBatches(ImageStack, 1e9);
+    exportInBatches(ImageStack, FileSize);
 
     function validateExportProperties()
         if FileName == "" || SaveIn == ""
@@ -37,19 +38,21 @@ function ExportTif(ImageStack, FileName, SaveIn)
     function exportInBatches(stack, memory)
         [rows, columns, frames] = size(stack);
         bytesPerFrame = rows * columns * bytesPerElement(stack);
-        totalBatches = max(ceil((frames * bytesPerFrame)/memory), 1);
-        framesPerBatch = ceil(frames / totalBatches);
+        framesPerBatch = max(floor(memory / bytesPerFrame), 1);
 
-        for frame = 1:framesPerBatch:frames
-            batch_StartIndex = frame;
-            batch_EndIndex = min(frame + framesPerBatch -1, frames);
-            batchStack = stack(:,:, batch_StartIndex:batch_EndIndex);
+        for startFrame = 1:framesPerBatch:frames
+            timer = tic;
+            endFrame = min(startFrame + framesPerBatch -1, frames);
+            batchStack = stack(:,:, startFrame:endFrame);
 
-            batchName = sprintf('%s_%02d.tif', FileName, ceil(frame/framesPerBatch));
-            imwrite(batchStack(:,:,1), fullfile(SaveIn, batchName));
-            for i = 2:size(batchStack, 3)
-                imwrite(batchStack(:,:,i), fullfile(SaveIn, batchName), 'WriteMode', 'append')
+            batchName = sprintf('%s_%02d.tif', FileName, ceil(startFrame/framesPerBatch));
+            imwrite(batchStack(:,:,1), fullfile(SaveIn, batchName), 'WriteMode', 'overwrite', 'Compression','none');
+            for i = 2:size(batchStack,3)
+                imwrite(batchStack(:,:,i), fullfile(SaveIn, batchName), 'WriteMode', 'append', 'Compression','none');
             end
+
+            exportTime = toc(timer);
+            fprintf('\tExported %s (%0.3gs, %d frames)\n', batchName, exportTime, size(batchStack,3))
         end
 
         function bytes = bytesPerElement(data)
