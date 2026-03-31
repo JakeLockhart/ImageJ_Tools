@@ -14,7 +14,6 @@ function imageStack = ImageSequence
         %   
     % <End Documentation>
     
-    zap
     fprintf('Select tif file(s) to load...\n')
     [fileName, folderPath] = userSelectFiles;
     validateImportSelection;
@@ -22,7 +21,6 @@ function imageStack = ImageSequence
     imageStack = loadSequence;
     fprintf('File(s) loaded ✓')
     
-
 
     function [fileName, folderPath] = userSelectFiles()
         [fileName, folderPath] = uigetfile('*.tif', 'Import tif files...', ...
@@ -52,7 +50,7 @@ function imageStack = ImageSequence
         imageStack = [];
 
         for file = 1:numel(paths)
-            Timer = tic;
+            timer = tic;
             fileInfo = imfinfo(paths(file));
             frames = numel(fileInfo);
             rows = fileInfo(1).Height;
@@ -63,8 +61,8 @@ function imageStack = ImageSequence
                 subStack(:,:,frame) = imread(paths(file), frame);
             end
             
-            importTime = toc(Timer);
-            fprintf('\tLoaded file %d (%.3gs)\n', file, importTime)
+            importTime = toc(timer);
+            fprintf('\tImported %s %d (%.3gs)\n', fileName{file}, file, importTime)
             imageStack = cat(3, imageStack, subStack);
         end
     end
