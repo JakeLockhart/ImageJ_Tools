@@ -1,20 +1,27 @@
 function GrayStack = RGB2Grayscale(Stack)
     % <Documentation>
         % RGBToGrayscale()
-        %   
+        %   Convert an RGB image to a grayscale image
         %   Created by: jsl5865
         %   
         % Syntax:
-        %   
+        %   GrayStack = RGB2Grayscale(Stack)
+        %
         % Description:
-        %   
+        %   Converts an RGB image stack to a grayscale image stack. 
+        %   This function essentially removes only the color channel of an RGB stack
+        %       in order to preserve pixel intensity.
+        %
         % Input:
-        %   
+        %   Stack   - An image stack which can be single- or multi-paged with a color
+        %               channel.
+        %
         % Output:
+        %   GrayStack   - A grayscale version of the input image stack
         %   
     % <End Documentation>
     arguments
-        Stack double {mustBeNumeric}
+        Stack {mustBeNumeric}
     end
 
     Dimensions = ndims(Stack);

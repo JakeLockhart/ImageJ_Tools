@@ -8,10 +8,17 @@ function MergedStack = MergeChannels(varargin)
         %   MergedStack = MergeChannels(varargin)
         %
         % Description:
-        %   
+        %   This function accepts multiple RGB image stacks to be combined into a single
+        %       multi-colored image stack.
+        %   Works best for color channels of high contrast (particularly well with red, green,
+        %       blue). Merging will work with colors of low contrast, but visually identifying
+        %       overlapping regions is more challenging.
+        %
         % Input:
-        %   
+        %   varargin    - A series of image stacks contained in cells to be merged
+        %
         % Output:
+        %   MergedStack - A concatenated image stack
         %   
     % <End Documentation>
 
