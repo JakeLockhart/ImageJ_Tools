@@ -1,16 +1,22 @@
 function imageStack = ImageSequence
     % <Documentation>
         % ImageSequence()
-        %   
+        %   Import a series of .tif files to the workspace
         %   Created by: jsl5865
         %   
         % Syntax:
-        %   
+        %   imageStack = ImageSequence
+        %
         % Description:
-        %   
+        %   Mimics the functionality of ImageJ(FIJI)'s File>Import>ImageSequence. 
+        %   User selection of one, or multiple, .tif file(s) to be loaded into the
+        %       MatLab workspace for processing.
+        %
         % Input:
-        %   
+        %   NA
+        %
         % Output:
+        %   imageStack  - An image stack loaded into the MatLab workspace
         %   
     % <End Documentation>
     

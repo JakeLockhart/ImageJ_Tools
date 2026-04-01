@@ -1,16 +1,31 @@
 function ExportTif(ImageStack, FileSize, FileName, SaveIn)
     % <Documentation>
         % ExportTif()
-        %   
+        %   Export 2D movie from workspace as a .tif file
         %   Created by: jsl5865
         %   
-        % Syntax:
+        % Syntax: 
+        %   ExportTif(ImageStack, FileSize, FileName, SaveIn)
         %   
         % Description:
-        %   
+        %   This function accepts a 2D movie and exports the variable from the workspace
+        %       to a destination folder. Most tif readers (such as ImageJ(FIJI)), can only
+        %       read files <4GB in size and save files in batches to protect devices from
+        %       files that are too large. This function mimics that process to save a 2D
+        %       movie made/processed within MatLab.
+        %   The ImageStack's file size is calculated and then batched into multiple output
+        %       files of ~FileSize into a user defined destination folder.
+        %   If the FileName or SaveIn inputs are not provided, this function prompts a UI
+        %       to define the export properties.
+        %
         % Input:
-        %   
+        %   ImageStack  - A 3D numeric variable
+        %   FileSize    - The max file size for each exported file in giga bytes
+        %   FileName    - The name of the output file
+        %   SaveIn      - The save destination
+        %
         % Output:
+        %   A series of tif files of size (FileSize) 
         %   
     % <End Documentation>
     arguments
