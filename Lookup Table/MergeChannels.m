@@ -46,5 +46,5 @@ function MergedStack = MergeChannels(varargin)
     
     MergedDimension = ndims(varargin{1}) + 1;
     MergedStack = max(cat(MergedDimension, varargin{:}), [], MergedDimension);
-
+    MergedStack = squeeze(MergedStack);
 end
