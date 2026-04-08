@@ -35,7 +35,7 @@ function imageStack = ImageSequence
 
     function validateImportSelection()
         if isequal(fileName, 0)
-            Identifier = 'ImportSelection::NoFileSelected';
+            Identifier = 'ImportSelection:NoFileSelected';
             ME = MException(Identifier, 'No files selected to import.');
             throwAsCaller(ME)
         end
