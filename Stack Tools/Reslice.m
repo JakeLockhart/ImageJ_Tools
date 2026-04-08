@@ -1,4 +1,23 @@
 function ReslicedStack = Reslice(Stack, Orientation)
+    % <Documentation>
+        % Reslice()
+        %   Create an orthagonal view of a image stack
+        %   Created by: jsl5865
+        %   
+        % Syntax:
+        %   ReslicedStack = Reslice(Stack, Orientation)
+        %
+        % Description:
+        %   A method to change the orientation of an image stack.
+        %
+        % Input:
+        %   Stack       - An image stack
+        %   Orientation - The reslice orientation: 'XY', 'XZ', 'YZ'
+        %   
+        % Output:
+        %   ReslicedStack   - An orthagonal view of the original image stack
+        %
+    % <End Documentation>
     arguments
         Stack
         Orientation (1,:) char {mustBeMember(Orientation, {'XY', 'XZ', 'YZ'})} = 'XZ'
