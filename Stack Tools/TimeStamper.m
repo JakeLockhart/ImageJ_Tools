@@ -90,7 +90,7 @@ function timeStamp = TimeStamper
             p.Font = uidropdown(parameterGrid, "Items", listTrueTypeFonts, "Value", "Arial", "Placeholder", "Arial"); p.Font.Layout.Row = 3; p.Font.Layout.Column = 2;
             p.FontSize = uieditfield(parameterGrid, "numeric", "Limits", [1, inf], "Value", 12); p.FontSize.Layout.Row = 3; p.FontSize.Layout.Column = 4;
             p.Prefix = uieditfield(parameterGrid, "text", "Value", '', "Placeholder", ''); p.Prefix.Layout.Row = 4; p.Prefix.Layout.Column = [2 4];
-            p.Suffix = uieditfield(parameterGrid, "text", "Value", ' s', "Placeholder", ' s'); p.Suffix.Layout.Row = 5; p.Suffix.Layout.Column = [2 4];
+            p.Suffix = uieditfield(parameterGrid, "text", "Value", 's', "Placeholder", 's'); p.Suffix.Layout.Row = 5; p.Suffix.Layout.Column = [2 4];
             p.DecimalPlaces = uieditfield(parameterGrid, "numeric", "Value", 2); p.DecimalPlaces.Layout.Row = 6; p.DecimalPlaces.Layout.Column = 2;
             p.Format = uicheckbox(parameterGrid, "Value", true, "Text", ""); p.Format.Layout.Row = 6; p.Format.Layout.Column = 4;
             p.Width = uieditfield(parameterGrid, "numeric", "Limits", [1, inf], "Value", 100); p.Width.Layout.Row = 7; p.Width.Layout.Column = 2; 
@@ -205,15 +205,20 @@ function timeStamp = TimeStamper
         function label = createTimeLabel
             if parameters.Format
                 currentTime = time(frame);
+                timeDirection = "";
+                if currentTime < 0
+                    timeDirection = "-";
+                end
 
+                currentTime = abs(currentTime);
                 hours = floor(currentTime/3600);
                 minutes = floor(mod(currentTime, 3600)/60);
                 seconds = mod(currentTime, 60);
 
                 if hours > 0
-                    baseLabel = sprintf('%02d:%02d:%02.0f', hours, minutes, seconds);
+                    baseLabel = sprintf('%s%02d:%02d:%02.0f', timeDirection, hours, minutes, seconds);
                 else
-                    baseLabel = sprintf('%02d:%02.0f', minutes, seconds);
+                    baseLabel = sprintf('%s%02d:%02.0f', timeDirection, minutes, seconds);
                 end
 
             else
